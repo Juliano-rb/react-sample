@@ -1,15 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { selectTasks } from '../TodoSelectors'
-import { actions } from '../TodoState'
+import useTodoStore from '../useTodoStore'
 import {
   Checkbox, Container, Description, ListItem,
 } from './TodoList.styles'
 
 export default function () {
-  const tasks = useSelector(selectTasks)
-  const dispatch = useDispatch()
-
-  const handleTaskToggle = (id) => dispatch(actions.toggleTask(id))
+  const { tasks, toggleTask: handleTaskToggle } = useTodoStore()
 
   const listTasks = () => tasks.map((task) => (
     <ListItem key={task.id}>
