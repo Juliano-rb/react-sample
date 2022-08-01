@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux'
-import { selectPlanets } from '../StarWarsSelectors'
 import { Planet } from '../StarWarsTypes'
+import useStarWarsStore from '../useStarWarsStore'
 import { Container, Info, ListItem } from './PlanetsList.styles'
 
 export default function () {
-  const planets = useSelector(selectPlanets)
+  const { planets } = useStarWarsStore()
 
   const renderDetails = (planet: Planet) => (
     <ListItem key={planet.name}>

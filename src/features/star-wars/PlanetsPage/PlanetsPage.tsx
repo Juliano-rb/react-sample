@@ -1,21 +1,22 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import PlanetsList from '../PlanetsList'
-import { selectErrorMessage } from '../StarWarsSelectors'
-import { actions } from '../StarWarsState'
+import useStarWarsStore from '../useStarWarsStore'
 
 export default function () {
-  const dispatch = useDispatch()
-  const errorMessage = useSelector(selectErrorMessage)
+  const {
+    errorMessage, getPlanets, setPlanets,
+  } = useStarWarsStore()
 
   useEffect(() => {
     document.title = 'Planetas • React Sample'
   }, [])
 
   useEffect(() => {
-    dispatch(actions.getPlanets())
-    return () => { dispatch(actions.setPlanets({ planets: [] })) }
-  }, [dispatch])
+    getPlanets()
+    return () => {
+      setPlanets([])
+    }
+  }, [getPlanets, setPlanets])
 
   return (
     <>
